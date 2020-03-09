@@ -1,0 +1,7 @@
+#myCanvas
+{
+    width: 640px;
+    height: 640px;
+    background: url('./tex/wood.png') repeat;
+    image-rendering: pixelated;
+}
