@@ -37,12 +37,18 @@ function Init() {
     context.fillStyle = "#84ffff";
     context.textAlign = "center";
 
-    //при клике мышью
-    canvas.onclick = function(e){
-      var x = (e.clientX - canvas.offsetLeft);
-      var y = (e.clientY - canvas.offsetTop);
+    function getMousePos(canvas, evt) {
+      var rect = canvas.getBoundingClientRect();
+      return {
+          x: evt.clientX - rect.left,
+          y: evt.clientY - rect.top
+      };
+    }
 
-      ClickAt(x,y, pxScale);
+    //при клике мышью
+    canvas.onclick = function(e)
+    {
+      ClickAt(getMousePos(canvas, e).x, getMousePos(canvas, e).y, pxScale);
     };
 
     //при клике с телефона
