@@ -21,7 +21,9 @@ var sources =
     12:      './tex/one_slime.png',
     13:      './tex/one_bone.png',
     14:      './tex/one_warn.png',    
-    circle: './tex/circle.png',
+    circle:  './tex/circle.png',
+    witch0:   './tex/witch_0.png',
+    witch1:   './tex/witch_1.png', 
   };
 
 var images = {};
@@ -149,6 +151,9 @@ function getDirection(startX, startY, destX, destY)
   };
 }
 
+var witch = [];
+var witchFrame = 0;
+
 document.addEventListener("DOMContentLoaded", function ()
 {
 
@@ -168,6 +173,17 @@ document.addEventListener("DOMContentLoaded", function ()
         context.drawImage(images[cauldronFrame], cauldronX, cauldronY, scaleItem*2, scaleItem*2);
         cauldronFrame++;
 
+        if (witchFrame < 5)
+        {
+          context.drawImage(images.witch0, scaleItem*4, scaleItem*2, scaleItem*2, scaleItem*4);
+        } else if (witchFrame <= 10){
+          context.drawImage(images.witch1, scaleItem*4, scaleItem*2, scaleItem*2, scaleItem*4);
+          if (witchFrame == 10){
+            witchFrame = 0;
+          }
+        }
+        witchFrame++;
+
         //отрисовка ингридиентов
         for(var n = 5; n < 10; n++)
         {   
@@ -176,5 +192,7 @@ document.addEventListener("DOMContentLoaded", function ()
 
         //отрисовка ингридиентов, летящих в котел
         AnimateFlyingIngredient();
+
+        context.drawImage(images.witch, scaleItem*4, scaleItem*2, scaleItem*2, scaleItem*4);
     }, 100);
 });
